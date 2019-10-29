@@ -59,4 +59,14 @@ public class WeightedGrade implements Grade {
 		return this.weight * this.value;
 	}
 	
+	/**
+	 * Method to set the weight value of a grade
+	 * @param newWeight the newWeight to set for the grade
+	 */
+	public void setWeight(double newWeight) {
+		if (newWeight < 0 || newWeight > 1.0) {
+			throw new IllegalArgumentException("Weight for grade should be between 0 and 1.0.");
+		}
+		this.weight = newWeight;
+	}
 }
