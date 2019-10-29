@@ -46,4 +46,42 @@ public class TestCompositeGradeGetValue {
 		testGrade.addGrade(87);
 		assertEquals(93.0, testGrade.getValue(), 0.01);
 	}
+	
+	/**
+	 * Junit test case for calling getValue on compositegrade with single entry after changing to new strategy
+	 */
+	@Test
+	public void testGetValueWithSetStrategySingleEntry() {
+		CompositeGrade testGrade = new CompositeGrade();
+		testGrade.addGrade(13.5);
+		testGrade.setStrategy(new SumGrades());
+		assertEquals(13.5, testGrade.getValue(), 0.01);
+	}
+	
+	/**
+	 * Junit test case for calling getValue on compositegrade with multiple entries after changing to new strategy
+	 */
+	@Test
+	public void testGetValueWithSetStrategyMultipleEntries() {
+		CompositeGrade testGrade = new CompositeGrade();
+		testGrade.addGrade(13.5);
+		testGrade.addGrade(15.0);
+		testGrade.setStrategy(new SumGrades());
+		assertEquals(28.5, testGrade.getValue(), 0.01);
+	}
+	
+	/**
+	 * Junit test case for calling getValue on compositegrade with multiple entries using default strategy, then changing and using
+	 * new strategy provided
+	 */
+	@Test
+	public void testGetValueWithBothStrategiesMultipleEntries() {
+		CompositeGrade testGrade = new CompositeGrade();
+		testGrade.addGrade(10.0);
+		testGrade.addGrade(20.0);
+		testGrade.addGrade(30.0);		
+		assertEquals(20.0, testGrade.getValue(), 0.01);
+		testGrade.setStrategy(new SumGrades());
+		assertEquals(60.0, testGrade.getValue(), 0.01);
+	}
 }

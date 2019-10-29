@@ -94,4 +94,12 @@ public class CompositeGrade {
 		}
 		return this.strategy.calculateGrade(this.listOfGrades);
 	}
+	
+	/**
+	 * Method to set the strategy to a newly selected strategy
+	 * @param newStrategy the strategy to set the grade to utilize
+	 */
+	public void setStrategy(Strategy newStrategy) {
+		this.strategy = newStrategy;
+	}
 }
