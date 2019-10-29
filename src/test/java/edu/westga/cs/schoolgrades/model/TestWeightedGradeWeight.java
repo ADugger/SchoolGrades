@@ -20,7 +20,7 @@ public class TestWeightedGradeWeight {
 	@Test
 	public void testGetDefaultWeightValue() {
 		WeightedGrade testGrade = new WeightedGrade(99.0);
-		assertEquals(1.0, testGrade.getWeight());
+		assertEquals(1.0, testGrade.getWeight(), .01);
 	}
 	
 	/**
@@ -29,9 +29,9 @@ public class TestWeightedGradeWeight {
 	@Test
 	public void testSettWeightOverDefaultValue() {
 		WeightedGrade testGrade = new WeightedGrade(82.0);		
-		assertEquals(1.0, testGrade.getWeight());
+		assertEquals(1.0, testGrade.getWeight(), .01);
 		testGrade.setWeight(.75);
-		assertEquals(.75, testGrade.getWeight());
+		assertEquals(.75, testGrade.getWeight(), .01);
 	}
 	
 	/**
@@ -40,7 +40,7 @@ public class TestWeightedGradeWeight {
 	@Test
 	public void testSettingWeightOverDefaultValueIncorrectly() {
 		WeightedGrade testGrade = new WeightedGrade(100);		
-		assertEquals(1.0, testGrade.getWeight());		
+		assertEquals(1.0, testGrade.getWeight(), .01);		
 		assertThrows(IllegalArgumentException.class, () -> {testGrade.setWeight(-0.75);});		
 	}
 }

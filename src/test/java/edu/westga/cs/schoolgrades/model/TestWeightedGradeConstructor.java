@@ -44,8 +44,8 @@ public class TestWeightedGradeConstructor {
 	@Test
 	public void testValidWeightedGradeWithoutWeight() {
 		WeightedGrade testGrade = new WeightedGrade(87.5);
-		assertEquals(87.5, testGrade.getValue());
-		assertEquals(1.0, testGrade.getWeight());
+		assertEquals(87.5, testGrade.getValue(), .01);
+		assertEquals(1.0, testGrade.getWeight(), .01);
 	}
 	
 	/**
@@ -54,7 +54,7 @@ public class TestWeightedGradeConstructor {
 	@Test
 	public void testValidWeightedGradeWithWeight() {
 		WeightedGrade testGrade = new WeightedGrade(100.0, .25);
-		assertEquals(25.0, testGrade.getValue());
-		assertEquals(0.25, testGrade.getWeight());
+		assertEquals(25.0, testGrade.getValue(), .01);
+		assertEquals(0.25, testGrade.getWeight(), .01);
 	}
 }
