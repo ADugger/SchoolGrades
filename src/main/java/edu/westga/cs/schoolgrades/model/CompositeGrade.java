@@ -15,10 +15,11 @@ public class CompositeGrade {
 	private ArrayList<Double> listOfGrades;
 	
 	/**
-	 * Constructor to initialize the grade value list	 
+	 * Constructor to initialize the grade value list and set the default strategy to avggrade strategy	 
 	 */
 	public CompositeGrade() {
-		listOfGrades = new ArrayList<Double>();
+		this.listOfGrades = new ArrayList<Double>();
+		this.strategy = new AvgGrades();
 	}
 	
 	/**
@@ -80,5 +81,17 @@ public class CompositeGrade {
 		} else {
 			this.listOfGrades.remove(index);
 		}		
+	}
+	
+	/**
+	 * Method that utilizes the set strategy's calculateGrade method to determine the grade value
+	 * @return double a value that represents the calculated grade value
+	 * @requires at least one grade must exist in the arraylist of grades
+	 */
+	public double getValue() {
+		if (this.listOfGrades.isEmpty()) {
+			throw new ArrayIndexOutOfBoundsException("The arraylist is empty so there is nothing to calculate.");
+		}
+		return this.strategy.calculateGrade(this.listOfGrades);
 	}
 }
