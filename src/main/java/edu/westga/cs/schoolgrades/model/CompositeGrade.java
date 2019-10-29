@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public class CompositeGrade {
 
+	private Strategy strategy;
 	private ArrayList<Double> listOfGrades;
 	
 	/**
