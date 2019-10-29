@@ -32,10 +32,29 @@ public class CompositeGrade {
 		}
 	}
 	
+	/**
+	 * Method to add a provided grade to list of grades to create the composite grade collection
+	 * @param newGrade the grade to add to the list
+	 * @requires newGrade >= 0
+	 */
 	public void addGrade(double newGrade) {
 		if (newGrade < 0) {
 			throw new IllegalArgumentException("A grade must have a value of at least 0 to be added.");
 		}
 		this.listOfGrades.add(newGrade);
+	}
+	
+	/**
+	 * Method to remove the grade at a particular index
+	 * @param index the index of the grade to remove
+	 */
+	public void removeGradeByIndex(int index) {
+		if (this.listOfGrades.isEmpty()) {
+			throw new ArrayIndexOutOfBoundsException("The arraylist is already empty so there is nothing to remove.");
+		}
+		if (index < 0 || index > this.listOfGrades.size() - 1) {
+			throw new ArrayIndexOutOfBoundsException("The index provided is out of bounds of the grades arraylist.");
+		}
+		this.listOfGrades.remove(index);
 	}
 }
