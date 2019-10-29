@@ -57,4 +57,27 @@ public class CompositeGrade {
 		}
 		this.listOfGrades.remove(index);
 	}
+	
+	/**
+	 * Method to remove the first entry of a particular grade
+	 * @param value the grade to seek within the array
+	 * @requires the grade must exist within the array or an exception is thrown
+	 */
+	public void removeGradeByValue(double value) {
+		boolean foundValue = false;
+		int index;
+		
+		for (index = 0; index < this.listOfGrades.size() - 1; index++) {
+			if (this.listOfGrades.get(index) == value) {
+				foundValue = true;
+				break;
+			}
+		}
+		
+		if (!foundValue) {
+			throw new IllegalArgumentException("The grade attempted to remove was not found within the array.");
+		} else {
+			this.listOfGrades.remove(index);
+		}		
+	}
 }

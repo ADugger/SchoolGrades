@@ -88,5 +88,69 @@ public class TestCompositeGradesRemoveGrades {
 		assertEquals(99.0, testGrade.getListOfGrades().get(0));
 		assertEquals(100.0, testGrade.getListOfGrades().get(1));
 	}
-
+	
+	/**
+	 * Test case for trying to remove a grade that doesn't exist within the arraylist
+	 */
+	@Test
+	public void testRemovingGradeByValueGradeDoesntExist() {
+		CompositeGrade testGrade = new CompositeGrade();
+		testGrade.addGrade(98.0);
+		testGrade.addGrade(99.0);
+		testGrade.addGrade(100.0);
+		assertThrows(IllegalArgumentException.class, () -> {testGrade.removeGradeByValue(75.2);});
+	}
+	
+	/**
+	 * Test case to remove a grade from array list when only 1 entry of the provided value exists
+	 */
+	@Test
+	public void testRemovingGradeByValueSingleEntryOfValue() {
+		CompositeGrade testGrade = new CompositeGrade();
+		testGrade.addGrade(75.0);
+		testGrade.addGrade(87.0);
+		testGrade.addGrade(84.0);
+		testGrade.addGrade(97.0);
+		assertEquals(4, testGrade.getListOfGrades().size());
+		assertEquals(84.0, testGrade.getListOfGrades().get(2));
+		testGrade.removeGradeByValue(84);
+		assertEquals(3, testGrade.getListOfGrades().size());
+		assertEquals(97.0, testGrade.getListOfGrades().get(2));
+	}
+	
+	/**
+	 * Test case to remove a grade from array list when only multiple entries exist and the first is in the middle
+	 */
+	@Test
+	public void testRemovingGradeByValueMultipleEntriesFirstInMiddle() {
+		CompositeGrade testGrade = new CompositeGrade();
+		testGrade.addGrade(75.0);
+		testGrade.addGrade(87.0);
+		testGrade.addGrade(84.0);
+		testGrade.addGrade(87.0);
+		testGrade.addGrade(97.0);
+		assertEquals(5, testGrade.getListOfGrades().size());
+		assertEquals(87.0, testGrade.getListOfGrades().get(1));
+		testGrade.removeGradeByValue(87);
+		assertEquals(4, testGrade.getListOfGrades().size());
+		assertEquals(84.0, testGrade.getListOfGrades().get(1));
+	}
+	
+	/**
+	 * Test case to remove a grade from array list when only multiple entries exist and the first is index 0
+	 */
+	@Test
+	public void testRemovingGradeByValueMultipleEntriesFirstIndexZero() {
+		CompositeGrade testGrade = new CompositeGrade();
+		testGrade.addGrade(87.0);
+		testGrade.addGrade(75.0);
+		testGrade.addGrade(87.0);
+		testGrade.addGrade(84.0);
+		testGrade.addGrade(97.0);
+		assertEquals(5, testGrade.getListOfGrades().size());
+		assertEquals(87.0, testGrade.getListOfGrades().get(0));
+		testGrade.removeGradeByValue(87);
+		assertEquals(4, testGrade.getListOfGrades().size());
+		assertEquals(75.0, testGrade.getListOfGrades().get(0));
+	}
 }
