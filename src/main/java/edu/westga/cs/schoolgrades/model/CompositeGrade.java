@@ -68,7 +68,7 @@ public class CompositeGrade {
 		boolean foundValue = false;
 		int index;
 		
-		for (index = 0; index < this.listOfGrades.size() - 1; index++) {
+		for (index = 0; index < this.listOfGrades.size(); index++) {
 			if (this.listOfGrades.get(index) == value) {
 				foundValue = true;
 				break;

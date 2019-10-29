@@ -153,4 +153,22 @@ public class TestCompositeGradesRemoveGrades {
 		assertEquals(4, testGrade.getListOfGrades().size());
 		assertEquals(75.0, testGrade.getListOfGrades().get(0));
 	}
+	
+	/**
+	 * Test case to remove a grade from array list when only 1 entry of the provided value exists and it's the last entry
+	 */
+	@Test
+	public void testRemovingGradeByValueSingleEntryOfValueAtEndOfList() {
+		CompositeGrade testGrade = new CompositeGrade();
+		testGrade.addGrade(75.0);
+		testGrade.addGrade(87.0);
+		testGrade.addGrade(84.0);
+		testGrade.addGrade(97.0);
+		assertEquals(4, testGrade.getListOfGrades().size());
+		assertEquals(97.0, testGrade.getListOfGrades().get(3));
+		testGrade.removeGradeByValue(97);
+		assertEquals(3, testGrade.getListOfGrades().size());
+		assertThrows(ArrayIndexOutOfBoundsException.class, () -> {testGrade.removeGradeByIndex(3);});
+		
+	}
 }

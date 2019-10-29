@@ -18,8 +18,8 @@ public class SumGrades implements Strategy {
 		if (grades.isEmpty()) {
 			return 0;
 		} else {
-			int totalValue = 0;
-			for (int index = 0; index < grades.size() - 1; index++) {
+			double totalValue = 0;
+			for (int index = 0; index < grades.size(); index++) {
 				totalValue += grades.get(index);
 			}
 			return totalValue;
