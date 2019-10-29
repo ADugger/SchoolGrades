@@ -17,6 +17,9 @@ public class SimpleGrade implements Grade {
 	 * @param theGrade the double value representing the grade initial value
 	 */
 	public SimpleGrade (double theGrade) {
+		if (theGrade < 0) {
+			throw new IllegalArgumentException("Initial grade should be 0 or greater.");
+		}
 		this.value = theGrade;
 	}
 	
