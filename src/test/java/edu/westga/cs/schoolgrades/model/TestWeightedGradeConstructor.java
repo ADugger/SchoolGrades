@@ -1,6 +1,7 @@
 package edu.westga.cs.schoolgrades.model;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,5 +36,25 @@ public class TestWeightedGradeConstructor {
 	@Test
 	public void testWeightedGradeAttemptBelowZeroWeight() {
 		assertThrows(IllegalArgumentException.class, () -> {new WeightedGrade(95.0, -0.5);});
+	}
+	
+	/**
+	 * Test case for constructing a valid weightedgrade
+	 */
+	@Test
+	public void testValidWeightedGradeWithoutWeight() {
+		WeightedGrade testGrade = new WeightedGrade(87.5);
+		assertEquals(87.5, testGrade.getValue());
+		assertEquals(1.0, testGrade.getWeight());
+	}
+	
+	/**
+	 * Test case for constructing a valid weightedgrade with weight provided
+	 */
+	@Test
+	public void testValidWeightedGradeWithWeight() {
+		WeightedGrade testGrade = new WeightedGrade(100.0, .25);
+		assertEquals(25.0, testGrade.getValue());
+		assertEquals(0.25, testGrade.getWeight());
 	}
 }

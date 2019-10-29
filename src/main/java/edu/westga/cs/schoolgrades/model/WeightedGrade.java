@@ -52,10 +52,11 @@ public class WeightedGrade implements Grade {
 	}
 	
 	/**
-	 * Required for impelmenting Grade interface, returns value of grade
+	 * Required for implementing Grade interface, returns value of grade
+	 * @return double value representing value * weight (weighted value of grade)
 	 */
 	public double getValue() {
-		return 0;
+		return this.weight * this.value;
 	}
 	
 }
