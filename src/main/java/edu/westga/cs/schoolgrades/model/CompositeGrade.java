@@ -31,4 +31,11 @@ public class CompositeGrade {
 			return (ArrayList<Double>) this.listOfGrades.clone();
 		}
 	}
+	
+	public void addGrade(double newGrade) {
+		if (newGrade < 0) {
+			throw new IllegalArgumentException("A grade must have a value of at least 0 to be added.");
+		}
+		this.listOfGrades.add(newGrade);
+	}
 }
