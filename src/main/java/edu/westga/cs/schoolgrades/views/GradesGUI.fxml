@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?> 
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -18,9 +18,9 @@
         <menus>
           <Menu mnemonicParsing="false" text="Data">
             <items>
-              <MenuItem mnemonicParsing="false" text="Add Quiz" />
-                  <MenuItem mnemonicParsing="false" text="Add Homework" />
-                  <MenuItem mnemonicParsing="false" text="Add Exam" />
+              <MenuItem fx:id="mitemNewQuiz" mnemonicParsing="false" text="Add Quiz" />
+                  <MenuItem fx:id="mitemNewHomework" mnemonicParsing="false" text="Add Homework" />
+                  <MenuItem fx:id="mitemNewExam" mnemonicParsing="false" text="Add Exam" />
             </items>
           </Menu>
         </menus>
@@ -37,7 +37,7 @@
                      </HBox.margin>
                      <children>
                         <Label text="Quizzes" />
-                        <ListView prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="lvQuiz" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </VBox>
                   <VBox prefHeight="100.0" prefWidth="185.0">
@@ -46,7 +46,7 @@
                      </HBox.margin>
                      <children>
                         <Label text="Homeworks" />
-                        <ListView prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="lvHomework" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </VBox>
                   <VBox prefHeight="100.0" prefWidth="185.0">
@@ -55,7 +55,7 @@
                      </HBox.margin>
                      <children>
                         <Label text="Exams" />
-                        <ListView prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="lvExam" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </VBox>
                </children>
@@ -68,7 +68,7 @@
                      </HBox.margin>
                      <children>
                         <Label text="Quiz Subtotal" />
-                        <TextField />
+                        <TextField fx:id="txtQuizSubtotal" />
                      </children>
                   </VBox>
                   <VBox prefHeight="64.0" prefWidth="185.0">
@@ -77,7 +77,7 @@
                      </HBox.margin>
                      <children>
                         <Label text="Homework Subtotal" />
-                        <TextField />
+                        <TextField fx:id="txtHomeworkSubtotal" />
                      </children>
                   </VBox>
                   <VBox prefHeight="75.0" prefWidth="185.0">
@@ -85,8 +85,8 @@
                         <Insets bottom="2.0" left="5.0" right="10.0" top="2.0" />
                      </HBox.margin>
                      <children>
-                        <Label text="Exame Subtotal" />
-                        <TextField />
+                        <Label text="Exam Subtotal" />
+                        <TextField fx:id="txtExamSubtotal" />
                      </children>
                   </VBox>
                </children>
@@ -98,12 +98,12 @@
                         <Insets bottom="2.0" left="65.0" right="4.0" top="2.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField prefHeight="25.0" prefWidth="121.0">
+                  <TextField fx:id="txtFinalGrade" prefHeight="25.0" prefWidth="121.0">
                      <HBox.margin>
                         <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" text="Recalculate">
+                  <Button fx:id="btnRecalculate" mnemonicParsing="false" text="Recalculate">
                      <HBox.margin>
                         <Insets bottom="2.0" left="5.0" right="10.0" top="2.0" />
                      </HBox.margin>
