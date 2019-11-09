@@ -86,23 +86,55 @@ public class SchoolGradesController {
 		this.txtHomeworkSubtotal.textProperty().bind(this.homeworkSubtotal.asString());
 		this.txtExamSubtotal.textProperty().bind(this.examSubtotal.asString());
 		this.txtFinalGrade.textProperty().bind(this.finalTotal.asString());
-		this.listviewQuizSetup();		
+		this.listviewQuizSetup();
+		this.listviewHomeworkSetup();	
+		this.listviewExamSetup();	
 	}	
 	
+	/**
+	 * Menu item action handler for the new quiz menu item
+	 * @param event the click event
+	 */
 	@FXML
 	private void handleNewQuizClick(ActionEvent event) {
 		this.quizGrades.add(new SimpleGrade(0.0));
 	}
 	
+	/**
+	 * Menu item action handler for the new homework menu item
+	 * @param event the click event
+	 */
+	@FXML
+	private void handleNewHomeworkClick(ActionEvent event) {
+		this.homeworkGrades.add(new SimpleGrade(0.0));
+	}
+	
+	/**
+	 * Menu item action handler for the new exam menu item
+	 * @param event the click event
+	 */
+	@FXML
+	private void handleNewExamClick(ActionEvent event) {
+		this.examGrades.add(new SimpleGrade(0.0));
+	}
+	
+	/**
+	 * Helper method to setup the listview and cell factory for the quiz item list
+	 */
 	private void listviewQuizSetup() {
 		this.lvQuiz.setItems(this.quizGrades);
-		this.lvQuiz.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);		
+		this.lvQuiz.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);	
+		this.lvQuiz.setEditable(true);
 		this.lvQuiz.setCellFactory(new Callback<ListView<SimpleGrade>, ListCell<SimpleGrade>>() {
 			@Override
 			public ListCell<SimpleGrade> call(ListView<SimpleGrade> theCall) {
-				 TextFieldListCell<SimpleGrade> oneCell = new TextFieldListCell<SimpleGrade>();
+				 TextFieldListCell<SimpleGrade> oneCell = new TextFieldListCell<SimpleGrade>();				 
 				 oneCell.setConverter(new StringConverter<SimpleGrade>() {
 					 public String toString(SimpleGrade theGrade) {
+						 if (theGrade == null) {
+							 return "";
+						 }
+						 
 						 return String.format("%.2f", theGrade.getValue());
 					 }
 					 
@@ -111,16 +143,81 @@ public class SchoolGradesController {
 							 double convertedValue = Double.parseDouble(theCellString);
 							 SimpleGrade convertedGrade = new SimpleGrade(convertedValue);
 							 return convertedGrade;
-						 } catch (NumberFormatException nfe) {
-							Alert errorAlert = new Alert(AlertType.ERROR);
-							errorAlert.setTitle("Not A Number");
-							errorAlert.setContentText("There was an error the number you entered for the grade." +nfe.getMessage());
-							errorAlert.showAndWait();
-						 }
-						return null;
+						 } catch (NumberFormatException nfe) {							
+							throw new IllegalArgumentException("There was a problem with the number you entered.");							
+						 }						
 					 }
 				 });
-				 oneCell.setEditable(true);
+				 return oneCell;
+			}			
+		});		
+	}
+	
+	/**
+	 * Helper method to setup the listview and cell factory for the homework item list
+	 */
+	private void listviewHomeworkSetup() {
+		this.lvHomework.setItems(this.homeworkGrades);
+		this.lvHomework.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);	
+		this.lvHomework.setEditable(true);
+		this.lvHomework.setCellFactory(new Callback<ListView<SimpleGrade>, ListCell<SimpleGrade>>() {
+			@Override
+			public ListCell<SimpleGrade> call(ListView<SimpleGrade> theCall) {
+				 TextFieldListCell<SimpleGrade> oneCell = new TextFieldListCell<SimpleGrade>();				 
+				 oneCell.setConverter(new StringConverter<SimpleGrade>() {
+					 public String toString(SimpleGrade theGrade) {
+						 if (theGrade == null) {
+							 return "";
+						 }
+						 
+						 return String.format("%.2f", theGrade.getValue());
+					 }
+					 
+					 public SimpleGrade fromString(String theCellString) {
+						 try {
+							 double convertedValue = Double.parseDouble(theCellString);
+							 SimpleGrade convertedGrade = new SimpleGrade(convertedValue);
+							 return convertedGrade;
+						 } catch (NumberFormatException nfe) {							
+							throw new IllegalArgumentException("There was a problem with the number you entered.");							
+						 }						
+					 }
+				 });
+				 return oneCell;
+			}			
+		});		
+	}
+	
+	/**
+	 * Helper method to setup the listview and cell factory for the exam item list
+	 */
+	private void listviewExamSetup() {
+		this.lvExam.setItems(this.examGrades);
+		this.lvExam.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);	
+		this.lvExam.setEditable(true);
+		this.lvExam.setCellFactory(new Callback<ListView<SimpleGrade>, ListCell<SimpleGrade>>() {
+			@Override
+			public ListCell<SimpleGrade> call(ListView<SimpleGrade> theCall) {
+				 TextFieldListCell<SimpleGrade> oneCell = new TextFieldListCell<SimpleGrade>();				 
+				 oneCell.setConverter(new StringConverter<SimpleGrade>() {
+					 public String toString(SimpleGrade theGrade) {
+						 if (theGrade == null) {
+							 return "";
+						 }
+						 
+						 return String.format("%.2f", theGrade.getValue());
+					 }
+					 
+					 public SimpleGrade fromString(String theCellString) {
+						 try {
+							 double convertedValue = Double.parseDouble(theCellString);
+							 SimpleGrade convertedGrade = new SimpleGrade(convertedValue);
+							 return convertedGrade;
+						 } catch (NumberFormatException nfe) {							
+							throw new IllegalArgumentException("There was a problem with the number you entered.");							
+						 }						
+					 }
+				 });
 				 return oneCell;
 			}			
 		});		

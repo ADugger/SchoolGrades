@@ -19,8 +19,8 @@
           <Menu mnemonicParsing="false" text="Data">
             <items>
               <MenuItem fx:id="mitemNewQuiz" mnemonicParsing="false" onAction="#handleNewQuizClick" text="Add Quiz" />
-                  <MenuItem fx:id="mitemNewHomework" mnemonicParsing="false" text="Add Homework" />
-                  <MenuItem fx:id="mitemNewExam" mnemonicParsing="false" text="Add Exam" />
+                  <MenuItem fx:id="mitemNewHomework" mnemonicParsing="false" onAction="#handleNewHomeworkClick" text="Add Homework" />
+                  <MenuItem fx:id="mitemNewExam" mnemonicParsing="false" onAction="#handleNewExamClick" text="Add Exam" />
             </items>
           </Menu>
         </menus>
