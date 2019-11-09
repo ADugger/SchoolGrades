@@ -128,13 +128,12 @@ public class SchoolGradesController {
 		this.lvQuiz.setCellFactory(new Callback<ListView<SimpleGrade>, ListCell<SimpleGrade>>() {
 			@Override
 			public ListCell<SimpleGrade> call(ListView<SimpleGrade> theCall) {
-				 TextFieldListCell<SimpleGrade> oneCell = new TextFieldListCell<SimpleGrade>();				 
+				 TextFieldListCell<SimpleGrade> oneCell = new TextFieldListCell<SimpleGrade>();						 
 				 oneCell.setConverter(new StringConverter<SimpleGrade>() {
 					 public String toString(SimpleGrade theGrade) {
 						 if (theGrade == null) {
 							 return "";
-						 }
-						 
+						 }						 
 						 return String.format("%.2f", theGrade.getValue());
 					 }
 					 
@@ -148,6 +147,7 @@ public class SchoolGradesController {
 						 }						
 					 }
 				 });
+				 oneCell.setAccessibleText(oneCell.getText());
 				 return oneCell;
 			}			
 		});		
@@ -183,6 +183,7 @@ public class SchoolGradesController {
 						 }						
 					 }
 				 });
+				 oneCell.setAccessibleText(oneCell.getText());
 				 return oneCell;
 			}			
 		});		
@@ -218,6 +219,7 @@ public class SchoolGradesController {
 						 }						
 					 }
 				 });
+				 oneCell.setAccessibleText(oneCell.getText());
 				 return oneCell;
 			}			
 		});		
