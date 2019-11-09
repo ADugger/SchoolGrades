@@ -1,23 +1,22 @@
 package edu.westga.cs.schoolgrades.controllers;
 
-import java.util.List;
-
+import edu.westga.cs.schoolgrades.model.AverageOfGradesStrategy;
+import edu.westga.cs.schoolgrades.model.CompositeGrade;
+import edu.westga.cs.schoolgrades.model.DropLowestStrategy;
 import edu.westga.cs.schoolgrades.model.SimpleGrade;
+import edu.westga.cs.schoolgrades.model.SumOfGradesStrategy;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
@@ -223,5 +222,35 @@ public class SchoolGradesController {
 				 return oneCell;
 			}			
 		});		
+	}
+	
+	/**
+	 * Method to handle the recalculate button functionality
+	 * @param event the click event
+	 */
+	@FXML
+	private void handleRecalculateClick(ActionEvent event) {
+		this.calculateSubtotals();
+	}
+	
+	/**
+	 * Helper method to calculate and set the subtotal values of the grades
+	 */
+	private void calculateSubtotals() {
+		SumOfGradesStrategy sumOfQuizGrades = new SumOfGradesStrategy();
+		DropLowestStrategy sumOfHomeworkGrades = new DropLowestStrategy(new AverageOfGradesStrategy());
+		AverageOfGradesStrategy sumOfExamGrades = new AverageOfGradesStrategy();
+		
+		CompositeGrade compositeQuizGrades = new CompositeGrade(sumOfQuizGrades);
+		CompositeGrade compositeHomeworkGrades = new CompositeGrade(sumOfHomeworkGrades);
+		CompositeGrade compositeExamGrades = new CompositeGrade(sumOfExamGrades);
+		
+		compositeQuizGrades.addAll(this.quizGrades);
+		compositeHomeworkGrades.addAll(this.homeworkGrades);
+		compositeExamGrades.addAll(this.examGrades);
+		
+		this.quizSubtotal.set(compositeQuizGrades.getValue());
+		this.homeworkSubtotal.set(compositeHomeworkGrades.getValue());
+		this.examSubtotal.set(compositeExamGrades.getValue());
 	}
 }

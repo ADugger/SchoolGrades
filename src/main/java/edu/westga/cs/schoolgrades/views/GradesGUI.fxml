@@ -125,7 +125,7 @@
                         <Tooltip text="Final Grade Value" />
                      </tooltip>
                   </TextField>
-                  <Button fx:id="btnRecalculate" mnemonicParsing="false" text="Recalculate">
+                  <Button fx:id="btnRecalculate" mnemonicParsing="false" onAction="#handleRecalculateClick" text="Recalculate">
                      <HBox.margin>
                         <Insets bottom="2.0" left="5.0" right="10.0" top="2.0" />
                      </HBox.margin>
