@@ -3,8 +3,10 @@ package edu.westga.cs.schoolgrades.controllers;
 import edu.westga.cs.schoolgrades.model.AverageOfGradesStrategy;
 import edu.westga.cs.schoolgrades.model.CompositeGrade;
 import edu.westga.cs.schoolgrades.model.DropLowestStrategy;
+import edu.westga.cs.schoolgrades.model.Grade;
 import edu.westga.cs.schoolgrades.model.SimpleGrade;
 import edu.westga.cs.schoolgrades.model.SumOfGradesStrategy;
+import edu.westga.cs.schoolgrades.model.WeightedGrade;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
@@ -36,6 +38,9 @@ public class SchoolGradesController {
 	private DoubleProperty homeworkSubtotal;
 	private DoubleProperty examSubtotal;
 	private DoubleProperty finalTotal;
+	private final double QUIZ_WEIGHT = 0.2;
+	private final double HOMEWORK_WEIGHT = 0.3;
+	private final double EXAM_WEIGHT = 0.5;
 	
 	@FXML
 	private ListView<SimpleGrade> lvQuiz;
@@ -231,6 +236,7 @@ public class SchoolGradesController {
 	@FXML
 	private void handleRecalculateClick(ActionEvent event) {
 		this.calculateSubtotals();
+		this.calculateFinalGrade();
 	}
 	
 	/**
@@ -252,5 +258,24 @@ public class SchoolGradesController {
 		this.quizSubtotal.set(compositeQuizGrades.getValue());
 		this.homeworkSubtotal.set(compositeHomeworkGrades.getValue());
 		this.examSubtotal.set(compositeExamGrades.getValue());
+	}
+	
+	/**
+	 * Helper method to calculate the final grade based on weighted values for subtotalled grades
+	 */
+	private void calculateFinalGrade() {
+		SumOfGradesStrategy sumofAllGrades = new SumOfGradesStrategy();
+		
+		CompositeGrade compositeTotalAllGrades = new CompositeGrade(sumofAllGrades);
+		
+		WeightedGrade weightedQuizSubtotal = new WeightedGrade((Grade) new SimpleGrade(this.quizSubtotal.get()), this.QUIZ_WEIGHT);
+		WeightedGrade weightedHomeworkSubtotal = new WeightedGrade((Grade) new SimpleGrade(this.homeworkSubtotal.get()), this.HOMEWORK_WEIGHT);
+		WeightedGrade weightedExamSubtotal = new WeightedGrade((Grade) new SimpleGrade(this.examSubtotal.get()), this.EXAM_WEIGHT);
+			
+		compositeTotalAllGrades.add(weightedQuizSubtotal);
+		compositeTotalAllGrades.add(weightedHomeworkSubtotal);
+		compositeTotalAllGrades.add(weightedExamSubtotal);
+		
+		this.finalTotal.set(compositeTotalAllGrades.getValue());
 	}
 }
