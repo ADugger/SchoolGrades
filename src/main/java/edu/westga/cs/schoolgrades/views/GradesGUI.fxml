@@ -8,6 +8,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -37,7 +38,10 @@
                      </HBox.margin>
                      <children>
                         <Label text="Quizzes" />
-                        <ListView fx:id="lvQuiz" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="lvQuiz" prefHeight="200.0" prefWidth="200.0">
+                           <tooltip>
+                              <Tooltip text="List of Quiz Grades" />
+                           </tooltip></ListView>
                      </children>
                   </VBox>
                   <VBox prefHeight="100.0" prefWidth="185.0">
@@ -46,7 +50,10 @@
                      </HBox.margin>
                      <children>
                         <Label text="Homeworks" />
-                        <ListView fx:id="lvHomework" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="lvHomework" prefHeight="200.0" prefWidth="200.0">
+                           <tooltip>
+                              <Tooltip text="List of Homework Grades" />
+                           </tooltip></ListView>
                      </children>
                   </VBox>
                   <VBox prefHeight="100.0" prefWidth="185.0">
@@ -55,7 +62,10 @@
                      </HBox.margin>
                      <children>
                         <Label text="Exams" />
-                        <ListView fx:id="lvExam" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="lvExam" prefHeight="200.0" prefWidth="200.0">
+                           <tooltip>
+                              <Tooltip text="List of Exam Grades" />
+                           </tooltip></ListView>
                      </children>
                   </VBox>
                </children>
@@ -68,7 +78,10 @@
                      </HBox.margin>
                      <children>
                         <Label text="Quiz Subtotal" />
-                        <TextField fx:id="txtQuizSubtotal" />
+                        <TextField fx:id="txtQuizSubtotal">
+                           <tooltip>
+                              <Tooltip text="Quiz Subtotal Value" />
+                           </tooltip></TextField>
                      </children>
                   </VBox>
                   <VBox prefHeight="64.0" prefWidth="185.0">
@@ -77,7 +90,10 @@
                      </HBox.margin>
                      <children>
                         <Label text="Homework Subtotal" />
-                        <TextField fx:id="txtHomeworkSubtotal" />
+                        <TextField fx:id="txtHomeworkSubtotal">
+                           <tooltip>
+                              <Tooltip text="Homework Subtotal Value" />
+                           </tooltip></TextField>
                      </children>
                   </VBox>
                   <VBox prefHeight="75.0" prefWidth="185.0">
@@ -86,7 +102,10 @@
                      </HBox.margin>
                      <children>
                         <Label text="Exam Subtotal" />
-                        <TextField fx:id="txtExamSubtotal" />
+                        <TextField fx:id="txtExamSubtotal">
+                           <tooltip>
+                              <Tooltip text="Exam Subtotal Value" />
+                           </tooltip></TextField>
                      </children>
                   </VBox>
                </children>
@@ -102,11 +121,17 @@
                      <HBox.margin>
                         <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
                      </HBox.margin>
+                     <tooltip>
+                        <Tooltip text="Final Grade Value" />
+                     </tooltip>
                   </TextField>
                   <Button fx:id="btnRecalculate" mnemonicParsing="false" text="Recalculate">
                      <HBox.margin>
                         <Insets bottom="2.0" left="5.0" right="10.0" top="2.0" />
                      </HBox.margin>
+                     <tooltip>
+                        <Tooltip text="Recalculate Button" />
+                     </tooltip>
                   </Button>
                </children>
             </HBox>
