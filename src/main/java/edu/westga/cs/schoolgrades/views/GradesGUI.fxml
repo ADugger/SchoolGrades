@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="336.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="336.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs.schoolgrades.controllers.SchoolGradesController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Data">
             <items>
-              <MenuItem fx:id="mitemNewQuiz" mnemonicParsing="false" text="Add Quiz" />
+              <MenuItem fx:id="mitemNewQuiz" mnemonicParsing="false" onAction="#handleNewQuizClick" text="Add Quiz" />
                   <MenuItem fx:id="mitemNewHomework" mnemonicParsing="false" text="Add Homework" />
                   <MenuItem fx:id="mitemNewExam" mnemonicParsing="false" text="Add Exam" />
             </items>
