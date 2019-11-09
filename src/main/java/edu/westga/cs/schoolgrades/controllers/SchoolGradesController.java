@@ -1,6 +1,5 @@
 package edu.westga.cs.schoolgrades.controllers;
 
-import edu.westga.cs.schoolgrades.model.Grade;
 import edu.westga.cs.schoolgrades.model.SimpleGrade;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -10,11 +9,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.cell.TextFieldListCell;
+import javafx.util.Callback;
 
 /**
  * Class to control the FXML GUI for the School Grades project and inject FXML references
@@ -62,7 +63,7 @@ public class SchoolGradesController {
 	 * Constructor method to allow controller instantiation and initialization of observable lists
 	 */
 	public SchoolGradesController() {	
-		this.quizGrades = FXCollections.observableArrayList();		
+		this.quizGrades = FXCollections.observableArrayList();			
 		this.homeworkGrades = FXCollections.observableArrayList();
 		this.examGrades = FXCollections.observableArrayList();
 	}
@@ -88,5 +89,21 @@ public class SchoolGradesController {
 	private void listviewQuizSetup() {
 		this.lvQuiz.setItems(this.quizGrades);
 		this.lvQuiz.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);		
+		this.lvQuiz.setCellFactory(new Callback<ListView<SimpleGrade>, ListCell<SimpleGrade>>() {
+			@Override
+			public ListCell<SimpleGrade> call(ListView<SimpleGrade> theCall) {
+				 TextFieldListCell<SimpleGrade> oneCell = new TextFieldListCell<SimpleGrade>() {
+					 @Override
+					 public void updateItem(SimpleGrade theGrade, boolean empty) {
+						super.updateItem(theGrade, empty);
+						if (!empty) {
+							setText(String.valueOf(theGrade.getValue()));
+						}
+				 	}
+				 };
+				 oneCell.setEditable(true);
+				 return oneCell;
+			}			
+		});		
 	}
 }
