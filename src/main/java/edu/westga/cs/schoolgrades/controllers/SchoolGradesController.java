@@ -93,7 +93,27 @@ public class SchoolGradesController {
 		this.listviewQuizSetup();
 		this.listviewHomeworkSetup();	
 		this.listviewExamSetup();	
+		this.preloadScores();
 	}	
+	
+	
+	/**
+	 * Private method to load some test quiz/homework/setup scores in by default purely to speed up teacher grading 
+	 */
+	private void preloadScores() {
+		this.quizGrades.add(new SimpleGrade(10.0));
+		this.quizGrades.add(new SimpleGrade(9.5));
+		this.quizGrades.add(new SimpleGrade(8.0));
+		
+		this.homeworkGrades.add(new SimpleGrade(50.0));
+		this.homeworkGrades.add(new SimpleGrade(44.5));
+		this.homeworkGrades.add(new SimpleGrade(49.0));
+		
+		this.examGrades.add(new SimpleGrade(100.0));
+		this.examGrades.add(new SimpleGrade(80.0));
+		this.examGrades.add(new SimpleGrade(80.0));
+	}
+	
 	
 	/**
 	 * Menu item action handler for the new quiz menu item
