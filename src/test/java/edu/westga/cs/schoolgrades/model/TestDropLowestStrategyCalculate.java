@@ -2,11 +2,12 @@ package edu.westga.cs.schoolgrades.model;
 
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,8 +21,8 @@ public class TestDropLowestStrategyCalculate {
 	private Grade mockGrade0;
 	private Grade mockGrade1;
 	private Grade mockGrade2;
-	private List<Grade> mockedList;
-	private List<Grade> mockedListWithoutLowest;
+	private ArrayList<Grade> listOfGrades;
+	private ArrayList<Grade> listWithoutLowest;
 	
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -32,10 +33,10 @@ public class TestDropLowestStrategyCalculate {
 		when(mockGrade1.getValue()).thenReturn(20.00);
 		when(mockGrade2.getValue()).thenReturn(30.00);
 		
-		mockedList = mock(List.class);		
-		mockedListWithoutLowest = mock(List.class);
+		listOfGrades = new ArrayList<Grade>();	
+		listWithoutLowest = new ArrayList<Grade>();
 		
-		mockChildStrategy = mock(SumOfGradesStrategy.class);				
+		mockChildStrategy = mock(GradeCalculationStrategy.class);				
 		dropLowestStrategy = new DropLowestStrategy(mockChildStrategy);
 		
 	}
@@ -49,62 +50,62 @@ public class TestDropLowestStrategyCalculate {
 
 	@Test
 	public void shouldNotDropLowestIfGradesListIsEmpty() {
-		dropLowestStrategy.calculate(mockedList);		
-		verify(mockChildStrategy).calculate(mockedListWithoutLowest);
+		dropLowestStrategy.calculate(listOfGrades);		
+		verify(mockChildStrategy).calculate(listWithoutLowest);
 	}
 	
 	public void shouldNotDropLowestIfGradesListHasOneElement() {
-		mockedList.add(mockGrade0);
-		mockedListWithoutLowest.add(mockGrade0);		
-		dropLowestStrategy.calculate(mockedList);		
-		verify(mockChildStrategy).calculate(mockedListWithoutLowest);
+		listOfGrades.add(mockGrade0);
+		listWithoutLowest.add(mockGrade0);		
+		dropLowestStrategy.calculate(listOfGrades);		
+		verify(mockChildStrategy).calculate(listWithoutLowest);
 	}
 	
 	@Test
 	public void canDropWhenLowestIsFirst() {
-		mockedList.add(mockGrade0);
-		mockedList.add(mockGrade1);
-		mockedList.add(mockGrade2);
-		mockedListWithoutLowest.add(mockGrade1);
-		mockedListWithoutLowest.add(mockGrade2);
-		dropLowestStrategy.calculate(mockedList);		
-		verify(mockChildStrategy).calculate(mockedListWithoutLowest);
+		listOfGrades.add(mockGrade0);
+		listOfGrades.add(mockGrade1);
+		listOfGrades.add(mockGrade2);
+		listWithoutLowest.add(mockGrade1);
+		listWithoutLowest.add(mockGrade2);
+		dropLowestStrategy.calculate(listOfGrades);		
+		verify(mockChildStrategy).calculate(listWithoutLowest);
 	}
 	
 	
 	@Test
 	public void canDropWhenLowestIsLast() {
-		mockedList.add(mockGrade1);
-		mockedList.add(mockGrade2);
-		mockedList.add(mockGrade0);
-		dropLowestStrategy.calculate(mockedList);
-		mockedListWithoutLowest.add(mockGrade1);
-		mockedListWithoutLowest.add(mockGrade2);
-		verify(mockChildStrategy).calculate(mockedListWithoutLowest);
+		listOfGrades.add(mockGrade1);
+		listOfGrades.add(mockGrade2);
+		listOfGrades.add(mockGrade0);
+		dropLowestStrategy.calculate(listOfGrades);
+		listWithoutLowest.add(mockGrade1);
+		listWithoutLowest.add(mockGrade2);
+		verify(mockChildStrategy).calculate(listWithoutLowest);
 		
 	}
 	
 	@Test
 	public void canDropWhenLowestIsInMiddle() {
-		mockedList.add(mockGrade1);
-		mockedList.add(mockGrade0);
-		mockedList.add(mockGrade2);
-		mockedListWithoutLowest.add(mockGrade1);
-		mockedListWithoutLowest.add(mockGrade2);
-		dropLowestStrategy.calculate(mockedList);
-		verify(mockChildStrategy).calculate(mockedListWithoutLowest);
+		listOfGrades.add(mockGrade1);
+		listOfGrades.add(mockGrade0);
+		listOfGrades.add(mockGrade2);
+		listWithoutLowest.add(mockGrade1);
+		listWithoutLowest.add(mockGrade2);
+		dropLowestStrategy.calculate(listOfGrades);
+		verify(mockChildStrategy).calculate(listWithoutLowest);
 	}
 	
 	@Test
 	public void dropsOnlyOneIfThereAreMultipleLowestGrades() {
-		mockedList.add(mockGrade1);
-		mockedList.add(mockGrade0);
-		mockedList.add(mockGrade2);
-		mockedList.add(mockGrade0);		
-		mockedListWithoutLowest.add(mockGrade0);
-		mockedListWithoutLowest.add(mockGrade1);
-		mockedListWithoutLowest.add(mockGrade2);
-		dropLowestStrategy.calculate(mockedList);
-		verify(mockChildStrategy).calculate(mockedListWithoutLowest);
+		listOfGrades.add(mockGrade1);
+		listOfGrades.add(mockGrade0);
+		listOfGrades.add(mockGrade2);
+		listOfGrades.add(mockGrade0);
+		listWithoutLowest.add(mockGrade1);			
+		listWithoutLowest.add(mockGrade2);
+		listWithoutLowest.add(mockGrade0);
+		dropLowestStrategy.calculate(listOfGrades);
+		verify(mockChildStrategy).calculate(listWithoutLowest);
 	}
 }
